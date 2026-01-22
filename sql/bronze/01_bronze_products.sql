@@ -20,7 +20,7 @@
     ==================================================================================================== */
 
 -- ==================================
--- CRIAÇÃO DA TABELA BRONZE_PRODUCTS
+-- CRIAÇÃO DA TABELA BRONZE.PRODUCTS
 -- ==================================
 
 DROP TABLE IF EXISTS bronze.products;
@@ -38,7 +38,7 @@ CREATE TABLE bronze.products (
 );
 
 -- ==================================================
--- CARGA DA TABELA BRONZE_PRODUCTS VIA TERMINAL PSQL
+-- CARGA DA TABELA BRONZE.PRODUCTS VIA TERMINAL PSQL
 -- ==================================================
 
 \COPY bronze.products
