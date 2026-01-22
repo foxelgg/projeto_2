@@ -23,6 +23,7 @@ CREATE TABLE gold.products AS
 SELECT
     product_id,
     title,
+    price,
     ROUND(price * (1 - discount_percentage / 100), 2) AS final_price,
     discount_percentage,
     rating,
@@ -30,9 +31,9 @@ SELECT
     brand,
     category,
     CASE
-        WHEN price < 50 THEN 'Baixo'
-        WHEN price < 500 THEN 'Médio'
-        WHEN price < 2000 THEN 'Alto'
+        WHEN (price * (1 - discount_percentage / 100)) < 50 THEN 'Baixo'
+        WHEN (price * (1 - discount_percentage / 100)) < 500 THEN 'Médio'
+        WHEN (price * (1 - discount_percentage / 100)) < 2000 THEN 'Alto'
         ELSE 'Premium'
     END AS price_bucket,
     CASE
