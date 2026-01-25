@@ -14,6 +14,7 @@
 CREATE OR REPLACE VIEW gold.vw_products_overview AS
 SELECT
     COUNT(*) AS total_produtos,
+    COUNT(*) FILTER (WHERE stock > 0) AS produtos_em_estoque,
     AVG(price) AS preco_medio,
     AVG(final_price) AS preco_final_medio,
     AVG(discount_percentage) AS desconto_medio,
@@ -44,11 +45,12 @@ GROUP BY category;
 CREATE OR REPLACE VIEW gold.vw_products_by_price_bucket AS
 SELECT
     price_bucket,
+    price_bucket_range,
     COUNT(*) AS total_produtos,
     AVG(final_price) AS preco_final_medio,
     AVG(rating) AS avaliacao_media
 FROM gold.products
-GROUP BY price_bucket;
+GROUP BY price_bucket, price_bucket_range;
 
 -- ======================================================================================
 -- vw_products_by_rating_bucket: Distribuição de produtos por classificação de avaliação
@@ -56,10 +58,11 @@ GROUP BY price_bucket;
 CREATE OR REPLACE VIEW gold.vw_products_by_rating_bucket AS
 SELECT
     rating_bucket,
+    rating_bucket_range,
     COUNT(*) AS total_produtos,
     AVG(final_price) AS preco_final_medio
 FROM gold.products
-GROUP BY rating_bucket;
+GROUP BY rating_bucket, rating_bucket_range;
 
 -- =============================================================================
 -- vw_stock_status: Resumo dos produtos que estão em estoque vs fora de estoque
